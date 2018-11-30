@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // デフォルトRealmを取得
         let realm = try! Realm()
         // 一覧を取得：金額を条件に、登録日時が新しい順でソート
-        self.itemList = realm.objects(Item.self).filter("price > 0").sorted(byProperty: "created", ascending: false)
+        self.itemList = realm.objects(Item.self).filter("price > 0").sorted(byKeyPath: "created", ascending: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 入力値をセット
         let item:Item = Item()
         item.name = self.textName.text
-        if ((self.textPrice.text?.characters.count)! > 0) {
+        if ((self.textPrice.text?.count)! > 0) {
             item.price = Int(self.textPrice.text!)!
         }
         
